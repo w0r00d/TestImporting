@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Emp;
 use App\Livewire\Importer;
 use Illuminate\Support\Facades\Route;
 
@@ -8,3 +9,4 @@ Route::get('/', function () {
 });
 
 Route::get('/imp', Importer::class);
+Route::get('/emp', Emp::class);
