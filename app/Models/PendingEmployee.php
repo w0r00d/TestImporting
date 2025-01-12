@@ -3,25 +3,31 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent\Builder;
-use App\Models\Employee;
+
 class PendingEmployee extends Model
 {
     //
     protected $fillable = ['name', 'national_id', 'join_date', 'salary'];
 
-    public static function getDups(){
+    public static function getDups()
+    {
 
-        $pes= PendingEmployee::get('national_id');
-      return  $dups = Employee::whereIn('national_id', $pes);
+        $pen = PendingEmployee::get('national_id'); // getting emps to find their duplicates
+
+        $dups = Employee::whereIn('national_id', $pen)->get('national_id')->union($pen); // getting the employees with same nid
+        $dups2 = Employee::whereIn('national_id', $pen);
+        $d = EmpView::whereIn('national_id', $dups)->orderBy('national_id');
+
+        return $d;
 
     }
 
-    public static function getNotDups() {
+    public static function getNotDups()
+    {
 
-        $pes= PendingEmployee::get('national_id');
-       return $dups = Employee::whereNotIn('national_id', $pes);
-       
+        $pes = PendingEmployee::get('national_id');
+
+        return $dups = Employee::whereNotIn('national_id', $pes);
+
     }
 }
