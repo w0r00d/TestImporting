@@ -1,5 +1,6 @@
  <div >
     {{-- Be like water. --}}
+    @livewire('database-notifications')
     <h1>Custom Actions </h1>
     <button wire:click="clearing"> Clear List</button>
 

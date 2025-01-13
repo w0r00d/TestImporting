@@ -53,7 +53,6 @@ class Emp extends Component implements HasForms, HasTable
 
             ])->striped()
             ->heading('Employees')
-             // ->query(Employee::where('name','worood'))
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
